@@ -1,0 +1,33 @@
+# --- Данные: НИКОГДА не коммитим датасет в гит ---
+data/raw/
+data/processed/
+*.zip
+*.tar
+*.tar.gz
+
+# --- Веса моделей: тяжёлые, гиту не место ---
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# --- Результаты прогонов Ultralytics ---
+runs/
+wandb/
+
+# --- Python мусор ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# --- Логи (json с метриками коммитим вручную, остальное нет) ---
+*.log
+results/logs/*.tmp
+
+# --- Системное ---
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,9 @@
+# Конфиг датасета для Ultralytics (YOLOv8 / YOLOv10 / RT-DETR).
+# path указывает на результат работы convert_kitti.py.
+# На Kaggle это /kaggle/working/kitti_yolo, локально поправишь под себя.
+path: /kaggle/working/kitti_yolo
+train: images/train
+val: images/val
+
+nc: 3
+names: ['Car', 'Pedestrian', 'Cyclist']
