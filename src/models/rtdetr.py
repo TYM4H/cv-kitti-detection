@@ -17,6 +17,7 @@ def train_rtdetr(
     batch: int = 8,
     device: int = 0,
     project: str = "results",
+    name: str = "rtdetr",
 ) -> dict:
     model_name = "rtdetr-l"
     model = RTDETR(f"{model_name}.pt")
@@ -27,7 +28,7 @@ def train_rtdetr(
         batch=batch,
         device=device,
         project=project,
-        name="rtdetr",
+        name=name,
         exist_ok=True,
     )
     metrics = model.val()
@@ -55,7 +56,7 @@ def train_rtdetr(
     }
     log_dir = Path(project) / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
-    with open(log_dir / "rtdetr.json", "w") as f:
+    with open(log_dir / f"{name}.json", "w") as f:
         json.dump(result, f, indent=2)
-    print(f"Метрики RT-DETR сохранены: {log_dir}/rtdetr.json")
+    print(f"Метрики RT-DETR сохранены: {log_dir}/{name}.json")
     return result

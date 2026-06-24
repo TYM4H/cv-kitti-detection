@@ -19,6 +19,7 @@ def run(
     data_cfg: str = "configs/kitti.yaml",
     kitti_yolo_dir: str = "/kaggle/working/kitti_yolo",
     epochs: int = 10,
+    imgsz: int = 640,
     batch: int | None = None,
     device: int = 0,
     project: str = "results",
@@ -31,17 +32,21 @@ def run(
             model_name=model_lower,
             data_cfg=data_cfg,
             epochs=epochs,
+            imgsz=imgsz,
             batch=batch or 64,
             device=device,
             project=project,
         )
     elif model_lower in RTDETR_MODELS:
+        name = f"rtdetr_e{epochs}_sz{imgsz}"
         return train_rtdetr(
             data_cfg=data_cfg,
             epochs=epochs,
+            imgsz=imgsz,
             batch=batch or 8,
             device=device,
             project=project,
+            name=name,
         )
     elif model_lower == "faster_rcnn":
         return train_faster_rcnn(
