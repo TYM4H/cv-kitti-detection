@@ -26,7 +26,12 @@ NUM_CLASSES = 4  # 3 + background (RetinaNet включает bg в num_classes)
 
 def build_model(num_classes: int = NUM_CLASSES, pretrained: bool = True):
     model = retinanet_resnet50_fpn(pretrained=pretrained)
-    in_channels = model.head.classification_head.conv[0].in_channels
+    conv0 = model.head.classification_head.conv[0]
+    # Conv2dNormActivation — Sequential обёртка, первый элемент — Conv2d
+    if hasattr(conv0, 'in_channels'):
+        in_channels = conv0.in_channels
+    else:
+        in_channels = conv0[0].in_channels
     num_anchors = model.head.classification_head.num_anchors
     model.head = RetinaNetHead(in_channels, num_anchors, num_classes)
     return model
