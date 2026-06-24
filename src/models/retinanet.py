@@ -8,6 +8,10 @@ API идентичен Faster R-CNN, но замена головы — чере
 import json
 from pathlib import Path
 
+import torchvision
+if not hasattr(torchvision, '_is_tracing'):
+    torchvision._is_tracing = lambda: False
+
 import torch
 from torch.utils.data import DataLoader
 from torchvision.models.detection import retinanet_resnet50_fpn

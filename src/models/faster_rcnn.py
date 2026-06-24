@@ -8,6 +8,9 @@ import json
 from pathlib import Path
 
 import torch
+import torchvision
+if not hasattr(torchvision, '_is_tracing'):
+    torchvision._is_tracing = lambda: False
 from torch.utils.data import DataLoader
 from torchvision.models.detection import fasterrcnn_resnet50_fpn
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
