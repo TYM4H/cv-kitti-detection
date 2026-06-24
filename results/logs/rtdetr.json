@@ -1,0 +1,31 @@
+{
+  "model": "rtdetr-l",
+  "epochs": 10,
+  "batch": 16,
+  "mAP50": 0.8961,
+  "mAP50_95": 0.625,
+  "precision": 0.8776,
+  "recall": 0.8264,
+  "per_class": {
+    "Car": {
+      "mAP50": 0.9727,
+      "P": 0.9248,
+      "R": 0.936
+    },
+    "Pedestrian": {
+      "mAP50": 0.8324,
+      "P": 0.85,
+      "R": 0.7413
+    },
+    "Cyclist": {
+      "mAP50": 0.8831,
+      "P": 0.8579,
+      "R": 0.8019
+    }
+  },
+  "speed_ms": {
+    "preprocess": 0.91,
+    "inference": 38.96,
+    "postprocess": 0.18
+  }
+}
