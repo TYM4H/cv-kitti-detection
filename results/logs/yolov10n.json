@@ -1,0 +1,32 @@
+{
+  "model": "yolov10n",
+  "epochs": 10,
+  "batch": 64,
+  "mAP50": 0.589,
+  "mAP50_95": 0.376,
+  "precision": 0.679,
+  "recall": 0.519,
+  "per_class": {
+    "Car": {
+      "mAP50": 0.819,
+      "P": 0.836,
+      "R": 0.718
+    },
+    "Pedestrian": {
+      "mAP50": 0.492,
+      "P": 0.638,
+      "R": 0.427
+    },
+    "Cyclist": {
+      "mAP50": 0.456,
+      "P": 0.563,
+      "R": 0.412
+    }
+  },
+  "speed_ms": {
+    "preprocess": 0.1,
+    "inference": 1.0,
+    "postprocess": 0.3
+  },
+  "params": "2.3M"
+}

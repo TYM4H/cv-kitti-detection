@@ -11,8 +11,8 @@ data/processed/
 *.onnx
 *.engine
 
-# --- Результаты прогонов Ultralytics ---
-runs/
+# --- Результаты прогонов Ultralytics (веса исключены через *.pt выше) ---
+runs/**/weights/
 wandb/
 
 # --- Python мусор ---
