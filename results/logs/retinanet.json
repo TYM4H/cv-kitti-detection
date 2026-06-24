@@ -1,0 +1,16 @@
+{
+  "model": "retinanet_resnet50_fpn",
+  "epochs": 10,
+  "batch": 16,
+  "lr": 0.0001,
+  "train_losses": [1.0461, 0.799, 0.7181, 0.6061, 0.5521, 0.5183, 0.4407, 0.412, 0.3813, 0.3444],
+  "mAP50": 0.7186,
+  "mAP50_95": 0.4312,
+  "recall": 0.5544,
+  "per_class": {
+    "Car": {"mAP50": 0.6415, "mAR": 0.7143},
+    "Pedestrian": {"mAP50": 0.3246, "mAR": 0.4664},
+    "Cyclist": {"mAP50": 0.3275, "mAR": 0.4824}
+  },
+  "speed_ms": {"inference": 67.63}
+}
