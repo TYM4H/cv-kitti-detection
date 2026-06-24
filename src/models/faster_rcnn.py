@@ -14,7 +14,7 @@ from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from tqdm import tqdm
 
 from src.dataset.dataset import KITTIDetectionDataset, collate_fn, get_transform
-from src.evaluation.metrics import compute_map
+from src.evaluation.metrics import compute_metrics
 
 
 NUM_CLASSES = 4  # 3 объекта + background
@@ -78,16 +78,15 @@ def train_faster_rcnn(
         train_losses.append(avg_loss)
         print(f"  loss: {avg_loss:.4f}")
 
-    map50, map50_95 = compute_map(model, dl_val, device, num_classes=NUM_CLASSES)
+    metrics = compute_metrics(model, dl_val, device)
 
     result = {
         "model": "faster_rcnn_resnet50_fpn",
         "epochs": epochs,
         "batch": batch,
         "lr": lr,
-        "mAP50": round(map50, 4),
-        "mAP50_95": round(map50_95, 4),
         "train_losses": [round(l, 4) for l in train_losses],
+        **metrics,
     }
     log_dir = Path(project) / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -97,5 +96,5 @@ def train_faster_rcnn(
     ckpt_dir = Path(project) / "weights"
     ckpt_dir.mkdir(parents=True, exist_ok=True)
     torch.save(model.state_dict(), ckpt_dir / "faster_rcnn.pth")
-    print(f"Метрики: mAP50={map50:.4f}, mAP50-95={map50_95:.4f}")
+    print(f"Метрики: mAP50={metrics['mAP50']:.4f}, mAP50-95={metrics['mAP50_95']:.4f}")
     return result
