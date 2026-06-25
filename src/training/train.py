@@ -23,7 +23,7 @@ def run(
     batch: int | None = None,
     device: int = 0,
     project: str = "results",
-    lr: float = 0.005,
+    lr: float | None = None,
 ) -> dict:
     model_lower = model.lower()
 
@@ -38,12 +38,14 @@ def run(
             project=project,
         )
     elif model_lower in RTDETR_MODELS:
-        name = f"rtdetr_e{epochs}_sz{imgsz}"
+        lr_tag = f"_lr{lr}" if lr is not None else ""
+        name = f"rtdetr_e{epochs}_sz{imgsz}{lr_tag}"
         return train_rtdetr(
             data_cfg=data_cfg,
             epochs=epochs,
             imgsz=imgsz,
             batch=batch or 8,
+            lr=lr,
             device=device,
             project=project,
             name=name,
@@ -53,7 +55,7 @@ def run(
             kitti_yolo_dir=kitti_yolo_dir,
             epochs=epochs,
             batch=batch or 4,
-            lr=lr,
+            lr=lr or 0.005,
             device_id=device,
             project=project,
         )
@@ -62,7 +64,7 @@ def run(
             kitti_yolo_dir=kitti_yolo_dir,
             epochs=epochs,
             batch=batch or 4,
-            lr=lr,
+            lr=lr or 1e-4,
             device_id=device,
             project=project,
         )

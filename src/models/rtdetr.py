@@ -15,13 +15,14 @@ def train_rtdetr(
     epochs: int = 10,
     imgsz: int = 640,
     batch: int = 8,
+    lr: float | None = None,
     device: int = 0,
     project: str = "results",
     name: str = "rtdetr",
 ) -> dict:
     model_name = "rtdetr-l"
     model = RTDETR(f"{model_name}.pt")
-    model.train(
+    train_kwargs = dict(
         data=data_cfg,
         epochs=epochs,
         imgsz=imgsz,
@@ -31,11 +32,16 @@ def train_rtdetr(
         name=name,
         exist_ok=True,
     )
+    if lr is not None:
+        train_kwargs["lr0"] = lr
+        train_kwargs["lrf"] = lr  # конечный lr = начальный (без decay)
+    model.train(**train_kwargs)
     metrics = model.val()
     result = {
         "model": "rtdetr-l",
         "epochs": epochs,
         "batch": batch,
+        "lr": lr,
         "mAP50": round(float(metrics.box.map50), 4),
         "mAP50_95": round(float(metrics.box.map), 4),
         "precision": round(float(metrics.box.mp), 4),
