@@ -14,26 +14,33 @@ def train_yolo(
     epochs: int = 10,
     imgsz: int = 640,
     batch: int = 64,
+    lr: float | None = None,
     device: int = 0,
     project: str = "results",
+    name: str | None = None,
 ) -> dict:
     """Обучает модель, возвращает словарь метрик."""
+    run_name = name or model_name
     model = YOLO(f"{model_name}.pt")
-    model.train(
+    train_kwargs = dict(
         data=data_cfg,
         epochs=epochs,
         imgsz=imgsz,
         batch=batch,
         device=device,
         project=project,
-        name=model_name,
+        name=run_name,
         exist_ok=True,
     )
+    if lr is not None:
+        train_kwargs["lr0"] = lr
+    model.train(**train_kwargs)
     metrics = model.val()
     result = {
         "model": model_name,
         "epochs": epochs,
         "batch": batch,
+        "lr": lr,
         "mAP50": round(float(metrics.box.map50), 4),
         "mAP50_95": round(float(metrics.box.map), 4),
         "precision": round(float(metrics.box.mp), 4),
@@ -52,7 +59,7 @@ def train_yolo(
             "postprocess": round(metrics.speed["postprocess"], 2),
         },
     }
-    _save_metrics(result, project, model_name)
+    _save_metrics(result, project, run_name)
     return result
 
 

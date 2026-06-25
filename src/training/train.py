@@ -28,14 +28,20 @@ def run(
     model_lower = model.lower()
 
     if model_lower in YOLO_MODELS:
+        lr_tag = f"_lr{lr}" if lr is not None else ""
+        sz_tag = f"_sz{imgsz}" if imgsz != 640 else ""
+        ep_tag = f"_e{epochs}" if epochs != 10 else ""
+        yolo_name = f"{model_lower}{ep_tag}{sz_tag}{lr_tag}" if (lr or imgsz != 640 or epochs != 10) else model_lower
         return train_yolo(
             model_name=model_lower,
             data_cfg=data_cfg,
             epochs=epochs,
             imgsz=imgsz,
             batch=batch or 64,
+            lr=lr,
             device=device,
             project=project,
+            name=yolo_name,
         )
     elif model_lower in RTDETR_MODELS:
         lr_tag = f"_lr{lr}" if lr is not None else ""
