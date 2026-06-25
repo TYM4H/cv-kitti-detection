@@ -31,3 +31,9 @@ results/logs/*.tmp
 .DS_Store
 .idea/
 .vscode/
+
+# --- Промежуточные батчи обучения (оставляем только 0,1,2) ---
+runs/**/train_batch[3-9]*.jpg
+runs/**/train_batch[0-9][0-9]*.jpg
+runs/**/train_batch[0-9][0-9][0-9]*.jpg
+runs/**/train_batch[0-9][0-9][0-9][0-9]*.jpg

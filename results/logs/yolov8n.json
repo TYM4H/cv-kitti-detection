@@ -1,31 +1,32 @@
 {
   "model": "yolov8n",
   "epochs": 10,
-  "batch": 32,
-  "mAP50": 0.8161,
-  "mAP50_95": 0.5537,
-  "precision": 0.8363,
-  "recall": 0.722,
+  "batch": 64,
+  "mAP50": 0.691,
+  "mAP50_95": 0.434,
+  "precision": 0.778,
+  "recall": 0.612,
   "per_class": {
     "Car": {
-      "mAP50": 0.9404,
-      "P": 0.9102,
-      "R": 0.8644
+      "mAP50": 0.882,
+      "P": 0.865,
+      "R": 0.798
     },
     "Pedestrian": {
-      "mAP50": 0.7224,
-      "P": 0.8302,
-      "R": 0.5826
+      "mAP50": 0.594,
+      "P": 0.722,
+      "R": 0.508
     },
     "Cyclist": {
-      "mAP50": 0.7855,
-      "P": 0.7685,
-      "R": 0.7188
+      "mAP50": 0.598,
+      "P": 0.743,
+      "R": 0.525
     }
   },
   "speed_ms": {
-    "preprocess": 1.13,
-    "inference": 4.62,
-    "postprocess": 0.86
-  }
+    "preprocess": 0.1,
+    "inference": 0.7,
+    "postprocess": 1.6
+  },
+  "params": "3.0M"
 }
