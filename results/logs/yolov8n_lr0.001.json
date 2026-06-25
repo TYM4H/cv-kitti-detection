@@ -1,0 +1,31 @@
+{
+  "model": "yolov8n",
+  "epochs": 15,
+  "batch": 64,
+  "mAP50": 0.7703,
+  "mAP50_95": 0.4919,
+  "precision": 0.8676,
+  "recall": 0.6665,
+  "per_class": {
+    "Car": {
+      "mAP50": 0.9217,
+      "P": 0.9138,
+      "R": 0.8339
+    },
+    "Pedestrian": {
+      "mAP50": 0.6683,
+      "P": 0.839,
+      "R": 0.5331
+    },
+    "Cyclist": {
+      "mAP50": 0.7209,
+      "P": 0.8499,
+      "R": 0.6326
+    }
+  },
+  "speed_ms": {
+    "preprocess": 0.54,
+    "inference": 1.72,
+    "postprocess": 0.95
+  }
+}
